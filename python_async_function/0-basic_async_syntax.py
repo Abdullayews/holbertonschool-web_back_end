@@ -3,9 +3,9 @@
 This module defines an asynchronous utility function that waits for a random
 delay and returns the amount of time waited.
 """
-
 import asyncio
 import random
+
 
 async def wait_random(max_delay: int = 10) -> float:
     """
