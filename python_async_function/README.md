@@ -2,8 +2,7 @@
 
 ---
 
-# 📘 Python - Async IO & Random Module in Python  
-**Author:** *Eugenio Martínez*
+# 📘 Python - Async IO & Random Module in Python 
 
 ## 🧭 Objective  
 This project introduces the fundamentals of **asynchronous programming in Python** using `async`, `await`, and the `asyncio` module.  
@@ -129,10 +128,3 @@ These guide your active recall and deeper understanding:
 - The `random` module provides tools for generating pseudo‑random numbers and selecting random elements.  
 
 Together, these tools help you build efficient, responsive programs and introduce randomness when needed.
-
----
-
-## 👤 Author  
-**Eugenio Martínez**
-
----
