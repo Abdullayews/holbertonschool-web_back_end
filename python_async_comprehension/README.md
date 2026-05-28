@@ -1,133 +1,52 @@
+<div align="center">
+
+# 🌀 Python — async comprehensions
+
+**Comprehensions that await: async generators on the event loop.**
+
+[![Python](https://img.shields.io/badge/Python-3.7%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![asyncio](https://img.shields.io/badge/stdlib-asyncio-3776AB?style=flat-square)](https://docs.python.org/3/library/asyncio.html)
+[![Holberton](https://img.shields.io/badge/Holberton-Specialization-E44D26?style=flat-square)](https://www.holbertonschool.com)
+
+</div>
 
 ---
 
-# Python - Async Comprehension
+## 📖 About this project
 
-##   Project Overview
+You know list comprehensions; you know `async def`. This tiny project
+welds them together: an **async generator** that yields ten random numbers
+with a half-second pause between each, an **async comprehension** consuming
+it without a single callback, and a `measure_runtime` that proves the whole
+pipeline runs concurrently — ~0.5 s total, not 10 × 0.5 s.
 
-This project explores **asynchronous generators**, **async comprehensions**, and **type-annotating asynchronous generators** in Python. These features were introduced to improve the readability, performance, and expressiveness of asynchronous code—especially when working with streams of data, concurrency, or I/O‑bound operations.
+## 🎯 Concepts covered
 
-You will learn how to:
+- `async def` generators with `yield`
+- `async for` — iterating asynchronously
+- `[x async for x in …]` — async comprehensions
+- `asyncio.run()` and measuring concurrent runtime
 
-- Write asynchronous generators using `async def` and `yield`
-- Use asynchronous comprehensions for cleaner async iteration
-- Apply proper type hints to async generators and async iterables
+## 📂 Files
 
----
+| File | What it does |
+|---|---|
+| [`0-async_generator.py`](https://github.com/Abdullayews/holbertonschool-web_back_end/tree/main/python_async_comprehension/0-async_generator.py) | `async_generator` — 10 random floats, one async nap apart |
+| [`1-async_comprehension.py`](https://github.com/Abdullayews/holbertonschool-web_back_end/tree/main/python_async_comprehension/1-async_comprehension.py) | Collects them with an async comprehension |
+| [`2-measure_runtime.py`](https://github.com/Abdullayews/holbertonschool-web_back_end/tree/main/python_async_comprehension/2-measure_runtime.py) | Times both running concurrently — ~0.5 seconds |
 
-##   Objective
+## ⚙️ Requirements
 
-The goal of this project is to help you understand:
+- 🐧 Ubuntu 18.04 LTS · Python 3.7 (async/await syntax)
+- 🧹 pycodestyle (PEP 8)
 
-- How asynchronous iteration works in Python
-- How async comprehensions simplify asynchronous loops
-- How to annotate async generators using `typing` tools
-- How these features improve performance and readability in async programs
+## 🚀 Try it yourself
 
----
-
-##   Key Definitions
-
-### **Asynchronous Generator**
-A function defined with `async def` that uses `yield` to produce values asynchronously.
-
-```python
-async def async_generator():
-    for i in range(5):
-        await asyncio.sleep(1)
-        yield i
-```
-
-### **Async Comprehension**
-A list/set/dict comprehension that iterates over an asynchronous iterator.
-
-```python
-result = [i async for i in async_generator()]
-```
-
-### **Type-Annotated Async Generator**
-Using `typing.AsyncGenerator`, `AsyncIterable`, or `AsyncIterator` to annotate async generators.
-
-```python
-from typing import AsyncGenerator
-
-async def async_generator() -> AsyncGenerator[int, None]:
-    ...
+```bash
+python3 1-async_comprehension.py   # gathers 10 numbers concurrently
+python3 2-measure_runtime.py       # ≈ 0.5s — the proof
 ```
 
 ---
 
-##   Uses and Practical Applications
-
-- Streaming data from APIs
-- Consuming asynchronous I/O (e.g., websockets)
-- Handling large datasets without blocking the event loop
-- Writing efficient concurrent pipelines
-- Improving readability of async loops with comprehensions
-
----
-
-##   Examples
-
-### **1. Writing an Asynchronous Generator**
-
-```python
-import asyncio
-from random import random
-
-async def async_generator():
-    for _ in range(10):
-        await asyncio.sleep(1)
-        yield random()
-```
-
-### **2. Using an Async Comprehension**
-
-```python
-async def async_comprehension():
-    return [value async for value in async_generator()]
-```
-
-### **3. Type-Annotating an Async Generator**
-
-```python
-from typing import AsyncGenerator
-
-async def typed_async_generator() -> AsyncGenerator[float, None]:
-    for _ in range(5):
-        await asyncio.sleep(1)
-        yield random()
-```
-
----
-
-##   Content Summary
-
-This project covers:
-
-- The syntax and behavior of asynchronous generators
-- How async comprehensions improve async code readability
-- The difference between synchronous and asynchronous iteration
-- How to properly annotate async generators using `typing`
-- Practical examples and exercises to reinforce learning
-
-### **Resources Used**
-
-- **PEP 530 – Asynchronous Comprehensions**  
-  https://intranet.hbtn.io/rltoken/UFCR8qW3nHmEDZZaHqXL7Q
-
-- **What’s New in Python: Asynchronous Comprehensions / Generators**  
-  https://intranet.hbtn.io/rltoken/PAGwxZUyVGBR8EMFGGNnGg
-
-- **Type-hints for generators**  
-  https://intranet.hbtn.io/rltoken/fOrb8FrWbcYu8evONWj2Kw
-
----
-
-##   Author
-
-**Eugenio Martínez**
-
----
-
-
+✍️ **Muhəmməd Abdullayev** · [![GitHub](https://img.shields.io/badge/@Abdullayews-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Abdullayews) · one of the projects in **[holbertonschool-web_back_end](../README.md)**

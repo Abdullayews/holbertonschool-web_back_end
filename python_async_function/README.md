@@ -1,130 +1,60 @@
+<div align="center">
 
+# ⚡ Python — async functions
 
----
+**asyncio fundamentals: wait_random, wait_n, tasks and concurrency math.**
 
-# 📘 Python - Async IO & Random Module in Python 
+[![Python](https://img.shields.io/badge/Python-3.7%2B-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![asyncio](https://img.shields.io/badge/stdlib-asyncio-3776AB?style=flat-square)](https://docs.python.org/3/library/asyncio.html)
+[![Holberton](https://img.shields.io/badge/Holberton-Specialization-E44D26?style=flat-square)](https://www.holbertonschool.com)
 
-## 🧭 Objective  
-This project introduces the fundamentals of **asynchronous programming in Python** using `async`, `await`, and the `asyncio` module.  
-You will also review the basics of Python’s `random` module for generating pseudo‑random values.
-
-The goal is to understand **how concurrency works**, how to **run coroutines**, how to **create tasks**, and how to **apply randomness** in simple programs.
-
----
-
-## 📚 Table of Contents  
-1. [Introduction](#introduction)  
-2. [Key Concepts](#key-concepts)  
-   - async / await  
-   - Running async programs  
-   - Concurrent coroutines  
-   - asyncio tasks  
-   - random module  
-3. [Questions We Have](#questions-we-have)  
-4. [Summary](#summary)  
-5. [Author](#author)
+</div>
 
 ---
 
-## 🧩 Introduction  
-Python’s `asyncio` library provides a way to write **non‑blocking**, **concurrent** programs using coroutines.  
-Instead of waiting for slow operations (like network calls or timers), your program can continue running other tasks.
+## 📖 About this project
 
-At the same time, the `random` module allows you to introduce randomness into your programs—useful for simulations, games, testing, and more.
+The asyncio foundation project. It starts with the atom — `wait_random`,
+a coroutine that sleeps a random delay — then builds concurrency out of
+it: `wait_n(n, max_delay)` launching n coroutines at once via
+`asyncio.gather`, and `measure_runtime` proving they overlap instead of
+queueing.
 
-This README gives you a structured overview of these topics in a way that supports **active recall**, **practice**, and **Holberton‑style learning**.
+The last step wraps the same logic in **`asyncio.Task`** objects
+(`task_wait_n`) — and benchmarking the two against each other shows how
+scheduling a thousand tasks compares to gathering them.
 
----
+## 🎯 Concepts covered
 
-## 🔑 Key Concepts
+- `async def` coroutines and `await`
+- `asyncio.run()` — entering the event loop
+- `asyncio.gather` — concurrent execution
+- `asyncio.Task` — scheduling work explicitly
+- Timing & proving concurrency with `time`
 
-### 1. `async` and `await`  
-- `async def` defines a coroutine  
-- `await` pauses execution until the awaited task completes  
-- Coroutines run inside an **event loop**
+## 📂 Files
 
-**Example:**
-```python
-import asyncio
+| File | What it does |
+|---|---|
+| [`0-basic_async_syntax.py`](https://github.com/Abdullayews/holbertonschool-web_back_end/tree/main/python_async_function/0-basic_async_syntax.py) | `wait_random` — the atomic coroutine |
+| [`1-concurrent_coroutines.py`](https://github.com/Abdullayews/holbertonschool-web_back_end/tree/main/python_async_function/1-concurrent_coroutines.py) | `wait_n` — n coroutines, one gather, sorted delays |
+| [`2-measure_runtime.py`](https://github.com/Abdullayews/holbertonschool-web_back_end/tree/main/python_async_function/2-measure_runtime.py) | Times wait_n — the overlap made visible |
+| [`3-tasks.py`](https://github.com/Abdullayews/holbertonschool-web_back_end/tree/main/python_async_function/3-tasks.py) | `task_wait_n` — same job, scheduled as Tasks |
+| [`4-tasks.py`](https://github.com/Abdullayews/holbertonschool-web_back_end/tree/main/python_async_function/4-tasks.py) | Benchmark: tasks vs gather, with documentation |
 
-async def greet():
-    print("Hello...")
-    await asyncio.sleep(1)
-    print("...world!")
+## ⚙️ Requirements
+
+- 🐧 Ubuntu 18.04 LTS · Python 3.7
+- 🧹 pycodestyle (PEP 8)
+- 📄 Each file documents its coroutine with a docstring
+
+## 🚀 Try it yourself
+
+```bash
+python3 1-concurrent_coroutines.py   # wait_n: 5 delays, sorted
+python3 3-tasks.py                   # the Task-based twin
 ```
 
 ---
 
-### 2. Running an Async Program  
-Use `asyncio.run()` to start the event loop and execute your main coroutine.
-
-```python
-asyncio.run(greet())
-```
-
----
-
-### 3. Running Concurrent Coroutines  
-Use `asyncio.gather()` to run multiple coroutines at the same time.
-
-```python
-await asyncio.gather(
-    task1(),
-    task2(),
-    task3()
-)
-```
-
----
-
-### 4. Creating asyncio Tasks  
-Tasks allow coroutines to run **in the background**.
-
-```python
-t = asyncio.create_task(my_coroutine())
-await t
-```
-
-Tasks start running immediately after creation.
-
----
-
-### 5. Using the `random` Module  
-Common functions:
-- `random.random()` → float between 0.0 and 1.0  
-- `random.randint(a, b)` → integer between a and b  
-- `random.choice(seq)` → pick a random element  
-- `random.shuffle(list)` → shuffle list in place  
-- `random.uniform(a, b)` → float between a and b  
-
-**Example:**
-```python
-import random
-
-print(random.randint(1, 6))
-print(random.choice(["red", "blue", "green"]))
-```
-
----
-
-## ❓ Questions We Have  
-These guide your active recall and deeper understanding:
-
-1. What is the difference between concurrency and parallelism?  
-2. Why must `await` be used inside an `async` function?  
-3. What does `asyncio.run()` do behind the scenes?  
-4. When should you use `asyncio.gather()` vs `asyncio.create_task()`?  
-5. How does Python generate pseudo‑random numbers?  
-6. What are common use cases for the `random` module?  
-7. What happens if you forget to `await` a coroutine?
-
----
-
-## 📝 Summary  
-- `async` and `await` let you write **non‑blocking**, **concurrent** code.  
-- `asyncio.run()` starts and manages the event loop.  
-- `asyncio.gather()` runs multiple coroutines concurrently.  
-- `asyncio.create_task()` schedules coroutines to run in the background.  
-- The `random` module provides tools for generating pseudo‑random numbers and selecting random elements.  
-
-Together, these tools help you build efficient, responsive programs and introduce randomness when needed.
+✍️ **Muhəmməd Abdullayev** · [![GitHub](https://img.shields.io/badge/@Abdullayews-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Abdullayews) · one of the projects in **[holbertonschool-web_back_end](../README.md)**
